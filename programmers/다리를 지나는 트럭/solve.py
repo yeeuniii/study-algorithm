@@ -6,22 +6,22 @@ class Bridge:
         self.MAX_WEIGHT = max_weight
         self.LENGTH = length
         self.bridge = deque([0 for _ in range(length)])
-        self.count_of_truck = 0
         self.total_truck_weight = 0
 
     def move_forward_all_trucks(self):
         if truck := self.bridge.popleft():
-            self.count_of_truck -= 1
             self.total_truck_weight -= truck
 
     def can_accept_truck(self, truck):
-        return self.count_of_truck < self.LENGTH and self.total_truck_weight + truck <= self.MAX_WEIGHT
+        return self.total_truck_weight + truck <= self.MAX_WEIGHT
 
     def add_truck(self, truck):
         self.bridge.append(truck)
         if truck:
-            self.count_of_truck += 1
             self.total_truck_weight += truck
+
+    def has_no_truck(self):
+        return self.total_truck_weight == 0
 
 
 def solution(bridge_length, weight, truck_weights):
@@ -30,7 +30,7 @@ def solution(bridge_length, weight, truck_weights):
     truck = 0
     bridge = Bridge(weight, bridge_length)
 
-    while len(trucks) or bridge.count_of_truck:
+    while len(trucks) or not bridge.has_no_truck():
         bridge.move_forward_all_trucks()
         if truck == 0 and len(trucks):
             truck = trucks.popleft()
