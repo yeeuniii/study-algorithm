@@ -27,19 +27,17 @@ class Bridge:
 def solution(bridge_length, weight, truck_weights):
     time = 0
     trucks = deque(truck_weights)
-    truck = 0
     bridge = Bridge(weight, bridge_length)
 
-    while len(trucks) or not bridge.has_no_truck():
+    while trucks:
         bridge.move_forward_all_trucks()
-        if truck == 0 and len(trucks):
+        if bridge.can_accept_truck(trucks[0]):
             truck = trucks.popleft()
-        if bridge.can_accept_truck(truck):
             bridge.add_truck(truck)
-            truck = 0
         else:
             bridge.add_truck(0)
         time += 1
+    time += bridge_length
     return time
 
 
