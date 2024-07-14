@@ -20,9 +20,6 @@ class Bridge:
         if truck:
             self.total_truck_weight += truck
 
-    def has_no_truck(self):
-        return self.total_truck_weight == 0
-
 
 def solution(bridge_length, weight, truck_weights):
     time = 0
