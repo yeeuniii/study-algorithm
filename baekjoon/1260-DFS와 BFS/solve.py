@@ -1,21 +1,15 @@
 import sys
 from collections import deque
+from collections import defaultdict
 
 
 def init_graph(m):
-    graph = dict()
+    graph = defaultdict(list)
 
     for _ in range(m):
         a, b = map(int, sys.stdin.readline().strip().split())
-
-        if a in graph:
-            graph[a].append(b)
-        else:
-            graph[a] = [b]
-        if b in graph:
-            graph[b].append(a)
-        else:
-            graph[b] = [a]
+        graph[a].append(b)
+        graph[b].append(a)
 
     for key in graph:
         graph[key].sort()
@@ -30,9 +24,6 @@ def bfs(graph, start_node):
     queue.append(start_node)
     while queue:
         node = queue.popleft()
-        if node not in graph:
-            visited.append(node)
-            break
         if node not in visited:
             visited.append(node)
             queue.extend(graph[node])
@@ -46,9 +37,6 @@ def dfs(graph, start_node):
     stack.append(start_node)
     while stack:
         node = stack.pop()
-        if node not in graph:
-            visited.append(node)
-            break
         if node not in visited:
             visited.append(node)
             stack.extend(reversed(graph[node]))
