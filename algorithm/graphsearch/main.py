@@ -1,5 +1,5 @@
-from algorithm.bfs import bfs
-from algorithm.dfs import dfs
+from algorithm.graphsearch.bfs import bfs
+from algorithm.graphsearch.dfs import dfs
 
 graph = {
     'A': ['B', 'C', 'D'],
