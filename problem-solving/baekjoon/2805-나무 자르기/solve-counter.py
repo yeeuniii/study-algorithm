@@ -7,6 +7,7 @@ input = lambda: sys.stdin.readline().strip()
 def get_maximum_height(wanted, heights):
     start = 1
     end = max(heights) - 1
+    result = 0
 
     while start <= end:
         mid = (start + end) // 2
@@ -14,9 +15,10 @@ def get_maximum_height(wanted, heights):
         tree = sum([(height - mid) * number if height > mid else 0 for height, number in heights.items()])
         if tree >= wanted:
             start = mid + 1
+            result = mid
         else:
             end = mid - 1
-    return end
+    return result
 
 
 def main():
