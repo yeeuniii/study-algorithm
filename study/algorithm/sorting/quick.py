@@ -1,19 +1,29 @@
 import sys
-
 sys.setrecursionlimit(10**5)
 
 
-def quick_sort(data):
-    if len(data) < 2:
-        return data
+def swap(data, left, right):
+    data[left], data[right] = data[right], data[left]
 
-    pivot = data.pop()
-    less = list()
-    greater = list()
 
-    for num in data:
-        if num <= pivot:
-            less.append(num)
-        else:
-            greater.append(num)
-    return quick_sort(less) + [pivot] + quick_sort(greater)
+def partition(data, left, right):
+    pivot = data[left]
+    less = left
+    greater = right
+
+    while less < greater:
+        while less < greater and data[greater] > pivot:
+            greater -= 1
+        while less < greater and data[less] <= pivot:
+            less += 1
+        swap(data, less, greater)
+    swap(data, left, less)
+    return less
+
+
+def quick_sort(data, left, right):
+    if left < right:
+        pivot = partition(data, left, right)
+        quick_sort(data, left, pivot - 1)
+        quick_sort(data, pivot + 1, right)
+    return data

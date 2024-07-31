@@ -4,20 +4,24 @@ import time
 from study.algorithm.sorting.quick import quick_sort
 from study.algorithm.sorting.selection import selection_sort
 
-data = list(range(1000))
+data = list(range(int(input())))
 random.shuffle(data)
 print(f"origin: {data}\n")
 
+# 삽입 정렬
+print("삽입 정렬(Selection Sort)")
+selection = data.copy()
+start = time.time()
+selection_sort(selection)
+end = time.time()
+print(f"sorted: {selection}")
+print(f"time: {end - start:.6f} sec")
 
-def sort(sorting, method, data):
-    print(f"# {sorting}")
-    start = time.time()
-    sorted_data = method(data)
-    end = time.time()
-    print(f"sorted: {sorted_data}")
-    print(f"time: {end - start:.6f} sec")
-    print()
-
-
-sort("삽입 정렬(Selection Sort)", selection_sort, data.copy())
-sort("퀵 정렬(Quick Sort)", quick_sort, data.copy())
+# 퀵 정렬
+print("퀵 정렬(Quick Sort)")
+quick = data.copy()
+start = time.time()
+quick_sort(quick, 0, len(data) - 1)
+end = time.time()
+print(f"sorted: {quick}")
+print(f"time: {end - start:.6f} sec")
