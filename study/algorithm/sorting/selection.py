@@ -16,7 +16,3 @@ def selection_sort(data):
         data[minimum_index + index] = data[index]
         data[index] = minimum
     return data
-
-
-data = [1, -1, -2, 2, -3, 3, 0]
-print(selection_sort(data))
