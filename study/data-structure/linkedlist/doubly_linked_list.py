@@ -24,6 +24,14 @@ class DoublyLinkedList:
         print("None")
 
     def clear(self):
+        node = self.head
+
+        while node:
+            next_node = node
+            node.next = None
+            next_node.prev = None
+            node = next_node
+
         self.head = None
         self.tail = None
         self.count = 0
@@ -33,7 +41,6 @@ class DoublyLinkedList:
             raise IndexError("IndexError: Out of Range")
 
         new_node = Node(data)
-        prev_node = self.head
 
         if self.count == 0:
             self.head = new_node
@@ -53,6 +60,7 @@ class DoublyLinkedList:
             self.count += 1
             return
 
+        prev_node = self.head
         for _ in range(index - 1):
             prev_node = prev_node.next
 
