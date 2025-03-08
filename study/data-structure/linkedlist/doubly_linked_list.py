@@ -27,9 +27,9 @@ class DoublyLinkedList:
         node = self.head
 
         while node:
-            next_node = node
+            next_node = node.next
             node.next = None
-            next_node.prev = None
+            node.prev = None
             node = next_node
 
         self.head = None
